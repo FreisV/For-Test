@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 const nav = document.querySelector('.menu__nav');
 const menuBackground = document.querySelector('.menu__background');
 const btn = document.querySelector('.menu__btn');

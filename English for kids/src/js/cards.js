@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 const cards = [
   ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
   [
