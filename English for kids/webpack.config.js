@@ -9,13 +9,7 @@ module.exports = {
   entry: './src/app.js',
   devtool: 'inline-source-map',
   resolve: {
-    alias: {
-      '@': './src',
-      '@styles': './src/styles',
-      '@services': './src/services',
-      '@components': './src/components',
-    },
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -28,11 +22,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        use: ['ts-loader'],
-        exclude: /node_modules/,
-      },
       {
         test: /\.s[ac]ss$/i,
         use: [
