@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPLugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -33,7 +35,15 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+         MiniCssExtractPlugin.loader, 'sass-loader', 'style-loader'
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+         MiniCssExtractPlugin.loader, 'css-loader'
+        ],
       },
       {
         test: /.m?js$/,
@@ -45,6 +55,18 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/img',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -52,6 +74,20 @@ module.exports = {
       title: 'Development',
       template: './src/index.html',
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, 'src', 'assets', 'audio'),
+          to: path.join(__dirname, 'dist', 'assets', 'audio'),
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: `[name].css`,
+    }),
   ],
 };
